@@ -25,7 +25,11 @@ class TTSExporter
     {
         $cards = [];
         foreach ($deck->getSlots() as $slot) {
-          $cards[] = $this->cardFormatter->getCardInfo($slot->getCard(), true);
+          $cardInfo = $this->cardFormatter->getCardInfo($slot->getCard(), true);
+          $quantity = $slot->getQuantity();
+          for ($i = 1; $i <= $quantity; $i++) {
+            $cards[] = $cardInfo;
+          }
         }
         $cardBackFileName = $this->getCardBackFileName($deck);
         $cardBackUrl = $this->imagesBaseUrl . $cardBackFileName . '?v=' . time();
